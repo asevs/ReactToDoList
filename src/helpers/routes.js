@@ -1,3 +1,3 @@
-const serverUrl = 'http://localhost:8080'
+const serverUrl = 'http://localhost:8080';
 export const toDoItemsApiUrl = id =>
-id ? `${serverUrl}/todo_items/${id}` : `${serverUrl}/allitems`
+  id ? `${serverUrl}/todo_items/${id}` : `${serverUrl}/item/getAll`;

@@ -1,5 +1,5 @@
-import React, {  } from 'react';
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const Button = styled.button`
   background: #232632;
@@ -15,7 +15,7 @@ const Button = styled.button`
 
 const TextInput = styled.input`
   padding: 5px;
-  font-size: .7em;
+  font-size: 0.7em;
   background: #232632;
   color: #d3d4d6;
   width: 100%;
@@ -31,13 +31,18 @@ const Container = styled.div`
   background: #232632;
   border-radius: 10px;
   padding: 5px;
-  `
+`;
 
-const NewTodoForm = ({onChange, draft, onSubmit}) => (
+const NewTodoForm = ({ onChange, draft, onSubmit }) => (
   <Container>
-    <TextInput placeholder='Type something...' type='text' onChange={onChange} value={draft} />
+    <TextInput
+      placeholder="Type something..."
+      type="text"
+      onChange={onChange}
+      value={draft}
+    />
     <Button onClick={onSubmit}>+</Button>
   </Container>
-)
+);
 
-export default NewTodoForm
+export default NewTodoForm;

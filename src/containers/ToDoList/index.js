@@ -1,97 +1,91 @@
-import React, { Component } from 'react';
-import ToDoItem from '../../components/ToDoItem'
-import NewTodoForm from '../../components/NewToDoForm'
-import styled from 'styled-components'
-import API from '../../helpers/api'
-
+import React, { Component } from "react";
+import styled from "styled-components";
+import ToDoItem from "../../components/ToDoItem";
+import NewTodoForm from "../../components/NewToDoForm";
+import API from "../../helpers/api";
 
 const Header = styled.h1`
-color:#fff;
-`
+  color: #fff;
+`;
 const DeleteButton = styled.button`
 border-radius: 10px;
 background: red
 padding: 5px;
 color: #fff;
 margin-bottom:10px;
-`
+`;
 
 class ToDoList extends Component {
-
-  
-
   static defaultProps = {
     tasks: [],
-    title: 'My stuff'
-  }
+    title: "My stuff"
+  };
 
   state = {
     tasks: this.props.tasks,
-    draft: '', 
-
-  }
-  
+    draft: ""
+  };
 
   componentDidMount = () => {
-    API.get(`/item/getAll`)
-      .then(res => {
-        const tasks = res.data;
-        this.setState({ tasks });
-      })
-  }
+    API.get(`/item/getAll`).then(res => {
+      const tasks = res.data;
+      this.setState({ tasks });
+    });
+  };
+
   updateDraft = event => {
-    this.setState({draft: event.target.value})
-  }
+    this.setState({ draft: event.target.value });
+  };
 
   itemAdd = () => {
     API.post(`/item/add`, {
-      id: '',
-    content: this.state.draft,
-    status: 'false',
-    createdItem: '',
-    }
-)
-.then(res => {
-  console.log(res);
-  console.log(res.data);
-})
-.then(this.componentDidMount)
-.then(this.setState({draft: ''}))
-  }
+      id: "",
+      content: this.state.draft,
+      status: "false",
+      createdItem: ""
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .then(this.componentDidMount)
+      .then(this.setState({ draft: "" }));
+  };
 
   removeAllTasks = () => {
-
     API.delete(`/item/delete/all`)
-    .then(res => {
-      console.log(res);
-      console.log(res.data)
-    })
-    .then(this.componentDidMount)
-    } 
-
-    
-
-    
-
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .then(this.componentDidMount);
+  };
 
   render() {
-    const { title } = this.props
-    const { tasks, draft } = this.state
+    const { title } = this.props;
+    const { tasks, draft } = this.state;
 
     return (
-    <div>       
-   <Header>{title}</Header>
+      <div>
+        <Header>{title}</Header>
         <DeleteButton onClick={this.removeAllTasks}>Remove All</DeleteButton>
-        {tasks.map(task => 
-        <ToDoItem id={task.id} key={task.id} text={task.content} status={task.status} componentDidMount={this.componentDidMount} />)}
+        {tasks.map(task => (
+          <ToDoItem
+            id={task.id}
+            key={task.id}
+            text={task.content}
+            status={task.status}
+            componentDidMount={this.componentDidMount}
+          />
+        ))}
         <NewTodoForm
           onSubmit={this.itemAdd}
           onChange={this.updateDraft}
-          draft={draft} />
-
-  </div>   
-   )
+          draft={draft}
+        />
+      </div>
+    );
   }
 }
 
-export default ToDoList
+export default ToDoList;
