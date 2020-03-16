@@ -12,13 +12,12 @@ border-radius: 10px;
 background: red
 padding: 5px;
 color: #fff;
-margin-bottom: 10px;
+margin-bottom:10px;
 `;
 
 class ToDoList extends Component {
   static defaultProps = {
     tasks: [],
-    lists: [],
     title: 'My stuff',
   };
 
@@ -28,11 +27,9 @@ class ToDoList extends Component {
   };
 
   componentDidMount = () => {
-    API.get(`/list/getAll`).then(res => {
-      const lists = res.data;
-      console.log(lists)
-      const tasks = lists['0'].toDoItems;
-      this.setState({ tasks, lists });
+    API.get('/item/getAll').then(res => {
+      const tasks = res.data;
+      this.setState({ tasks });
     });
   };
 
@@ -40,10 +37,13 @@ class ToDoList extends Component {
     this.setState({ draft: event.target.value });
   };
 
-  
-
   itemAdd = () => {
-    API.post(`/list/add`, this.state.lists)
+    API.post('/item/add', {
+      id: '',
+      content: this.state.draft,
+      status: 'false',
+      createdItem: '',
+    })
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -53,7 +53,7 @@ class ToDoList extends Component {
   };
 
   removeAllTasks = () => {
-    API.delete(`/item/delete/all`)
+    API.post('/relay/1')
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -68,7 +68,7 @@ class ToDoList extends Component {
     return (
       <div>
         <Header>{title}</Header>
-        <DeleteButton onClick={this.removeAllTasks}>Remove All</DeleteButton>
+        <DeleteButton onClick={this.removeAllTasks}>Przekaźnik</DeleteButton>
         {tasks.map(task => (
           <ToDoItem
             id={task.id}

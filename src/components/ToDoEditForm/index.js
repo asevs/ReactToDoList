@@ -38,7 +38,7 @@ class ToDoEditForm extends Component {
               API.post(`/item/update`, {
                 ...values,
               });
-              this.props.history.push('/');
+              this.props.history.push('/todolist');
             }}
             validate={values => {
               const errors = {};

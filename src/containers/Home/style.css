@@ -1,0 +1,11 @@
+.Scene svg {
+  justify-content: center;
+  width: 40%;
+  position:absolute;
+  left: 0;
+  right:0;
+  margin: 0 auto;
+  margin-top: 5vh;
+
+
+}

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import API from "../../helpers/api";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import API from '../../helpers/api';
 
 const Item = styled.div`
-  background: #232632;
+  background: #258ea6;
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 7px;
-  color: ${props => (props.status ? "#1fd84d" : "#c7c8cb")}
-  text-decoration: ${props => (props.status ? "line-through" : "auto")}
+  color: ${props => (props.status ? '#1fd84d' : '#c7c8cb')}
+  text-decoration: ${props => (props.status ? 'line-through' : 'auto')}
   `;
 const ButtonDeleteById = styled.button`
   background: #232632;
@@ -34,18 +34,18 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   border: 2px solid #343744;
-  background: #232632;
+  background: #258ea6;
   border-radius: 10px;
   padding: 5px;
 `;
 
 class ToDoItem extends Component {
   static defaultProps = {
-    status: false
+    status: false,
   };
 
   state = {
-    status: this.props.status
+    status: this.props.status,
   };
 
   toggleStatus = () => {
@@ -64,7 +64,7 @@ class ToDoItem extends Component {
   };
 
   render() {
-    const { text, id } = this.props;
+    const { id, text } = this.props;
 
     return (
       <Container>
